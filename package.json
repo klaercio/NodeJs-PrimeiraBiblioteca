@@ -2,15 +2,17 @@
   "name": "nodejs-criandosuaprimeirabiblioteca",
   "version": "1.0.0",
   "description": "",
-  "type" : "module",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cli": "node ./cli.js ./arquivos/texto1.md"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chalk": "4.0"
+    "chalk": "4.0",
+    "node-fetch": "^3.2.3"
   }
 }

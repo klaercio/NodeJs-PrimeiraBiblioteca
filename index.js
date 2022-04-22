@@ -38,7 +38,7 @@ export default async function pegaArquivo(caminhoDoArquivo) {
     } catch(erro) {
         tratarErro(erro);
     }
-}  
+}
 
 /* async function pegaArquivo(caminhoDoArquivo) {
     const encoding = 'utf-8';
