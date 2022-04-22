@@ -17,12 +17,31 @@ function tratarErro(erro) {
     throw new Error(chalk.red(erro.code, 'não há arquivo no caminho'));
 }
 
-function pegaArquivo(caminhoDoArquivo) {
+async function pegaArquivo(caminhoDoArquivo) {
+    try {
+        const texto = await fs.promises.readFile(caminhoDoArquivo, 'utf-8');
+        console.log(chalk.green(texto));
+    } catch(erro) {
+        tratarErro(erro);
+    }
+}
+
+/* function pegaArquivo(caminhoDoArquivo) {
+    fs.promises
+    .readFile(caminhoDoArquivo, 'utf-8')
+    .then((texto)=> {
+        console.log(chalk.green(texto));})
+    .catch((erro) => {
+        tratarErro(erro);})
+} */
+
+
+/* function pegaArquivo(caminhoDoArquivo) {
     fs.readFile(caminhoDoArquivo, 'utf-8', (err, data) => {
         if (err) 
             return tratarErro(err);
         console.log(chalk.green(data));    
     })
-}
+} */
 
 pegaArquivo('./arquivos/texto1.md');
