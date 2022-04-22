@@ -1,5 +1,6 @@
 import chalk from 'chalk';
-import fs from 'fs';
+import fs, { link } from 'fs';
+import { text } from 'stream/consumers';
 
 /* console.log(chalk.green('Vamos Começar!'));
 
@@ -13,18 +14,43 @@ function texto(string) {
 
 console.log(texto(paragragfo)); */
 
-function tratarErro(erro) {
+function extraiLinks(texto) {
+    const regex = /\[([^\]]*)\]\(([^\)]*)\)/gm;
+    const arrayResultados = [];
+
+    let temp;
+
+    while ((temp = regex.exec(texto)) !== null) {
+        arrayResultados.push({[temp[1]]: temp[2]});
+    }
+
+    return arrayResultados;
+}
+ 
+ function tratarErro(erro) {
     throw new Error(chalk.red(erro.code, 'não há arquivo no caminho'));
 }
 
 async function pegaArquivo(caminhoDoArquivo) {
     try {
         const texto = await fs.promises.readFile(caminhoDoArquivo, 'utf-8');
-        console.log(chalk.green(texto));
+        console.log(extraiLinks(texto)); 
     } catch(erro) {
         tratarErro(erro);
     }
-}
+}  
+
+/* async function pegaArquivo(caminhoDoArquivo) {
+    const encoding = 'utf-8';
+    try {
+      const texto = await fs.promises.readFile(caminhoDoArquivo, encoding)
+      console.log(chalk.green(texto))
+    } catch(erro) {
+      trataErro(erro);
+    } finally {
+      console.log(chalk.yellow('operação concluída'));
+    }
+} */
 
 /* function pegaArquivo(caminhoDoArquivo) {
     fs.promises
@@ -34,7 +60,6 @@ async function pegaArquivo(caminhoDoArquivo) {
     .catch((erro) => {
         tratarErro(erro);})
 } */
-
 
 /* function pegaArquivo(caminhoDoArquivo) {
     fs.readFile(caminhoDoArquivo, 'utf-8', (err, data) => {
