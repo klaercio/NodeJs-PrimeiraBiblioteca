@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+//import chalk from 'chalk';
 import fs, { link } from 'fs';
 import { text } from 'stream/consumers';
 
@@ -28,7 +28,7 @@ function extraiLinks(texto) {
 }
  
  function tratarErro(erro) {
-    throw new Error(chalk.red(erro.code, 'não há arquivo no caminho'));
+    throw new Error(erro.code, 'não há arquivo no caminho');
 }
 
 export default async function pegaArquivo(caminhoDoArquivo) {
